@@ -7,30 +7,30 @@ def score(game):
     in_first_half = True
     result = Constants.MINIMUM_POINT
     frame = 1
-    previous_value = 0
-    for index, current_element in enumerate(game):
-        current_value = get_value(current_element)
-        if current_element == '/':
-            result += Constants.MAXIMUM_POINT - previous_value
+    previous_point = 0
+    for index, current_character in enumerate(game):
+        current_point = get_value(current_character)
+        if current_character == '/':
+            result += Constants.MAXIMUM_POINT - previous_point
         else:
-            result += current_value
-        if frame < Constants.FRAMES_THRESHOLD and current_value == Constants.MAXIMUM_POINT:
-            next_value = get_value(game[index + 1])
-            if current_element == '/':
-                result += next_value
-            elif current_element == 'X' or current_element == 'x':
-                result += next_value
+            result += current_point
+        if frame < Constants.FRAMES_THRESHOLD and current_point == Constants.MAXIMUM_POINT:
+            next_point = get_value(game[index + 1])
+            if current_character == '/':
+                result += next_point
+            elif current_character == 'X' or current_character == 'x':
+                result += next_point
                 if game[index + 2] == '/':
-                    result += Constants.MAXIMUM_POINT - next_value
+                    result += Constants.MAXIMUM_POINT - next_point
                 else:
                     result += get_value(game[index + 2])
         if not in_first_half:
             frame += 1
         in_first_half = not in_first_half
-        if current_element.lower() == 'x':
+        if current_character.lower() == 'x':
             in_first_half = True
             frame += 1
-        previous_value = current_value
+        previous_point = current_point
     return result
 
 
