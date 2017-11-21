@@ -1,3 +1,6 @@
+""" Bowling kata """
+
+
 def score(game):
     """ Calculates the overall score of a bowling game"""
 
@@ -31,20 +34,24 @@ def score(game):
     return result
 
 
-def get_value(char):
-    result = None
-    if char >= '1' and char <= '9':
-        result = int(char)
-    elif char.lower() == 'x' or char == '/':
-        result = Constants.MAXIMUM_POINT
-    elif char == '-':
-        result = Constants.MINIMUM_POINT
+def get_value(character):
+    """ returns an the actual point value of a character """
+
+    point = -1
+    if character >= '1' and character <= '9':
+        point = int(character)
+    elif character.lower() == 'x' or character == '/':
+        point = Constants.MAXIMUM_POINT
+    elif character == '-':
+        point = Constants.MINIMUM_POINT
     else:
         raise ValueError()
-    return result
+    return point
 
 
 class Constants():
+    """ Stores the constant values of a bowling game """
+
     FRAMES_THRESHOLD = 10
     MAXIMUM_POINT = 10
     MINIMUM_POINT = 0
