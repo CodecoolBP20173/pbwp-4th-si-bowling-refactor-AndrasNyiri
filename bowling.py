@@ -16,10 +16,8 @@ def score(game):
             result += current_point
         if frame < Constants.FRAMES_THRESHOLD and current_point == Constants.MAXIMUM_POINT:
             next_point = get_value(game[index + 1])
-            if current_character == '/':
-                result += next_point
-            elif current_character == 'X' or current_character == 'x':
-                result += next_point
+            result += next_point
+            if current_character == 'X' or current_character == 'x':
                 if game[index + 2] == '/':
                     result += Constants.MAXIMUM_POINT - next_point
                 else:
