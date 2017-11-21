@@ -1,20 +1,23 @@
 def score(game):
+    """ Calculates the overall score of a bowling game"""
     result = 0
     frame = 1
     in_first_half = True
     previous_value = 0
     for index in range(len(game)):
+        current_value = get_value(game[index])
         if game[index] == '/':
             result += 10 - previous_value
         else:
-            result += get_value(game[index])
-        if frame < 10 and get_value(game[index]) == 10:
+            result += current_value
+        if frame < 10 and current_value == 10:
+            next_value = get_value(game[index + 1])
             if game[index] == '/':
-                result += get_value(game[index + 1])
+                result += next_value
             elif game[index] == 'X' or game[index] == 'x':
-                result += get_value(game[index + 1])
+                result += next_value
                 if game[index + 2] == '/':
-                    result += 10 - get_value(game[index + 1])
+                    result += 10 - next_value
                 else:
                     result += get_value(game[index + 2])
         if not in_first_half:
@@ -23,7 +26,7 @@ def score(game):
         if game[index].lower() == 'x':
             in_first_half = True
             frame += 1
-        previous_value = get_value(game[index])
+        previous_value = current_value
     return result
 
 
